@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <p v-if="pending">Loading...</p>
+    <div v-else>
       <ProductDetails :product="product"/>
     </div>
   </template>
@@ -9,7 +10,7 @@
     const uri = 'https://fakestoreapi.com/products/' + id
   
     //  fetch the products
-    const { data: product } = await useFetch(uri, { key: id })
+    const { pending, data: product } = await useLazyFetch(uri, { key: id })
   
     definePageMeta({
       layout: "products",
